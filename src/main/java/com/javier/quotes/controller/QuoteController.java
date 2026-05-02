@@ -2,6 +2,7 @@ package com.javier.quotes.controller;
 
 import com.javier.quotes.model.Quote;
 import com.javier.quotes.service.QuoteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,13 @@ public class QuoteController {
 
     // Crear Frase
     @PostMapping
-    public ResponseEntity<Quote> createQuote(@RequestBody Quote quote) {
+    public ResponseEntity<Quote> createQuote(@Valid @RequestBody Quote quote) {
         return ResponseEntity.status(HttpStatus.CREATED).body(quoteService.createQuote(quote));
     }
 
     // Modificar frase
     @PutMapping("/{id}")
-    public ResponseEntity<Quote> updateQuote(@PathVariable Long id, @RequestBody Quote quote) {
+    public ResponseEntity<Quote> updateQuote(@PathVariable Long id, @Valid @RequestBody Quote quote) {
         return ResponseEntity.ok(quoteService.updateQuote(id, quote));
     }
 
